@@ -30,6 +30,9 @@ class StatsView @JvmOverloads constructor(
     private var colors = emptyList<Int>()
 
     private var progress = 0F
+    private var progress2 = 0F
+    private var progress3 = 0F
+    private var progress4 = 0F
     private var valueAnimator: ValueAnimator? = null
 
 
@@ -39,6 +42,7 @@ class StatsView @JvmOverloads constructor(
             fontSize = getDimension(R.styleable.StatsView_fontSize, fontSize)
             val resId = getResourceId(R.styleable.StatsView_colors, 0)
             colors = resources.getIntArray(resId).toList()
+
         }
     }
 
@@ -69,17 +73,32 @@ class StatsView @JvmOverloads constructor(
         )
     }
 
+    var startFrom = -90F
+    val angle = 90F
+
     override fun onDraw(canvas: Canvas) {
         if (data.isEmpty()) {
             return
         }
 
-        var startFrom = -90F
-        for ((index, datum) in data.withIndex()) {
-            val angle = 360F * datum
-            paint.color = colors.getOrNull(index) ?: randomColor()
-            canvas.drawArc(oval, (startFrom+360*progress), angle * progress, false, paint)
-            startFrom += angle
+//        for ((index, datum) in data.withIndex()) {
+//            val angle = 360F * datum
+//            paint.color = colors.getOrNull(index) ?: randomColor()
+//            canvas.drawArc(oval, (startFrom+360*progress), angle * progress, false, paint)
+//            startFrom += angle
+//        }
+
+        if (progress != 0F) {
+            drawPart(canvas, 0, progress)
+        }
+        if (progress2 != 0F) {
+            drawPart(canvas, 1, progress2 - 1F)
+        }
+        if (progress3 != 0F) {
+            drawPart(canvas, 2, progress3 - 2F)
+        }
+        if (progress4 != 0F) {
+            drawPart(canvas, 3, progress4 - 3F)
         }
 
         canvas.drawText(
@@ -90,16 +109,37 @@ class StatsView @JvmOverloads constructor(
         )
     }
 
+    private fun drawPart(canvas: Canvas, number: Int, progressAnim: Float) {
+        paint.color = colors.getOrNull(number) ?: randomColor()
+        canvas.drawArc(
+            oval,
+            startFrom + (90F * number.toFloat()),
+            angle * (progressAnim),
+            false,
+            paint
+        )
+    }
+
     private fun update() {
         valueAnimator?.let {
             it.removeAllListeners()
             it.cancel()
         }
-        progress = 0F
 
-        valueAnimator = ValueAnimator.ofFloat(0F, 1F).apply {
+        //     progress = 0F
+
+        valueAnimator = ValueAnimator.ofFloat(0F, 4F).apply {
             addUpdateListener { anim ->
-                progress = anim.animatedValue as Float
+                //     progress = anim.animatedValue as Float
+                if (0F < (anim.animatedValue as Float) && (anim.animatedValue as Float) <= 1F) {
+                    progress = anim.animatedValue as Float
+                } else if (1F < (anim.animatedValue as Float) && (anim.animatedValue as Float) <= 2F) {
+                    progress2 = anim.animatedValue as Float
+                } else if (2F < (anim.animatedValue as Float) && (anim.animatedValue as Float) <= 3F) {
+                    progress3 = anim.animatedValue as Float
+                } else if (3F < (anim.animatedValue as Float) && (anim.animatedValue as Float) <= 4F) {
+                    progress4 = anim.animatedValue as Float
+                }
                 invalidate()
             }
             duration = 5000
