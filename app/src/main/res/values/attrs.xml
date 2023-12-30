@@ -7,6 +7,7 @@
         <attr name="orderOfFilling" format="enum">
             <enum name="parallel" value="0"/>
             <enum name="sequentially" value="1"/>
+            <enum name ="bidirectional" value="2"/>
         </attr>
     </declare-styleable>
 </resources>

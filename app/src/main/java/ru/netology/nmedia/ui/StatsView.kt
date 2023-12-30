@@ -75,7 +75,7 @@ class StatsView @JvmOverloads constructor(
     }
 
     var startFrom = -90F
-    val angle = 90F
+    var angle = 90F
 
     override fun onDraw(canvas: Canvas) {
         if (data.isEmpty()) {
@@ -103,6 +103,16 @@ class StatsView @JvmOverloads constructor(
                 }
                 if (progress4 != 0F) {
                     drawPart(canvas, 3, progress4 - 3F)
+                }
+            }
+            2 -> {
+                startFrom =-45F
+                angle = 45F
+                for (index in data.indices) {
+                    paint.color = colors.getOrNull(index) ?: randomColor()
+                    canvas.drawArc(oval, startFrom, -angle * progress, false, paint)
+                    canvas.drawArc(oval, startFrom, angle * progress, false, paint)
+                    startFrom += 90F
                 }
             }
         }
