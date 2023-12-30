@@ -32,7 +32,8 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 // Пример 1 android.view.animation
 //        val label = findViewById<TextView>(R.id.label)
 //        val viewAnim = AnimationUtils.loadAnimation(
-//            this, R.anim.view_animation
+//            this,
+//            R.anim.view_animation
 //        ).apply {
 //            setAnimationListener(object : Animation.AnimationListener {
 //                override fun onAnimationStart(animation: Animation?) {
