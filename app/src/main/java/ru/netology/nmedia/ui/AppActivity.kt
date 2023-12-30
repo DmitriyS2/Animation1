@@ -75,7 +75,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 //        ObjectAnimator.ofPropertyValuesHolder(view, rotation, alpha)
 //            .apply {
 //                startDelay = 500
-//                duration = 500
+//                duration = 2500
 //                interpolator = LinearInterpolator()
 //            }.start()
 // Конец примера 4
@@ -87,7 +87,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 //            .scaleY(1.2F)
 //            .setInterpolator(LinearInterpolator())
 //            .setStartDelay(500)
-//            .setDuration(500)
+//            .setDuration(2500)
 //            .start()
 // Конец примера 5
 
@@ -99,7 +99,7 @@ class AppActivity : AppCompatActivity(R.layout.activity_app) {
 //        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 0F, 1F)
 //        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 0F, 1F)
 //        val scale = ObjectAnimator.ofPropertyValuesHolder(view, scaleX, scaleY).apply {
-//            duration = 300
+//            duration = 3000
 //            interpolator = BounceInterpolator()
 //        }
 //        AnimatorSet().apply {
